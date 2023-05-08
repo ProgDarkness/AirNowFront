@@ -13,13 +13,13 @@ expo init my-app --template @native-base/expo-template
 CREATE
 
 # Instalar Expo
-npm install -g expo-cli
+```npm install -g expo-cli```
 
 # Created Template
-npx create-expo-app AirNow --template @native-base/expo-template
+```npx create-expo-app AirNow --template @native-base/expo-template```
 
 # Actualizar Expo
-expo upgrade
+```expo upgrade```
 
 # Si hay error con react native
-npx expo install react-native@0.71.7
+```npx expo install react-native@0.71.7```
