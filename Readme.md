@@ -10,16 +10,24 @@ The official NativeBase template for [Expo](https://docs.expo.io/)
 expo init my-app --template @native-base/expo-template
 ```
 
-CREATE
+# CREATE PROJECT
 
 # Instalar Expo
-```npm install -g expo-cli```
+```sh
+npm install -g expo-cli
+```
 
 # Created Template
-```npx create-expo-app AirNow --template @native-base/expo-template```
+```sh
+npx create-expo-app AirNow --template @native-base/expo-template
+```
 
 # Actualizar Expo
-```expo upgrade```
+```sh 
+expo upgrade
+```
 
 # Si hay error con react native
-```npx expo install react-native@0.71.7```
+```sh
+npx expo install react-native@0.71.7
+```
