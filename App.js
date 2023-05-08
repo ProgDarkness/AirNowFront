@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Text,
   Link,
@@ -14,6 +14,7 @@ import {
 } from "native-base";
 import NativeBaseIcon from "./components/NativeBaseIcon";
 import { Platform } from "react-native";
+import { useState } from "react";
 
 // Define the config
 const config = {
@@ -36,6 +37,7 @@ export default function App() {
         <VStack space={5} alignItems="center">
           <NativeBaseIcon />
           <Heading size="lg">Welcome to NativeBase</Heading>
+          <Text>Probando Render</Text>
           <HStack space={2} alignItems="center">
             <Text>Edit</Text>
             <Box
