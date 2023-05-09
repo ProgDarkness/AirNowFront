@@ -13,6 +13,9 @@ import {
   Box
 } from 'native-base'
 import NativeBaseIcon from '../components/NativeBaseIcon'
+import consulta from '../APis/fastAPIs'
+
+consulta()
 
 // Define the config
 const config = {
