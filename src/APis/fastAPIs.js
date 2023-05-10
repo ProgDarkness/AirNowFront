@@ -1,12 +1,10 @@
 import axios from 'axios'
 
-export default function consulta() {
-  axios
-    .get('http://localhost:8000/')
-    .then((response) => {
-      console.log(response.data)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+const fetchFastAPIHome = async () => {
+  const response = await axios('http://localhost:8000/')
+  const stringify = JSON.stringify(response)
+  const json = await JSON.parse(stringify)
+  return json
 }
+
+export { fetchFastAPIHome }

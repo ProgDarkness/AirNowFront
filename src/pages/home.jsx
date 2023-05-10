@@ -10,12 +10,11 @@ import {
   NativeBaseProvider,
   extendTheme,
   VStack,
+  Alert,
   Box
 } from 'native-base'
 import NativeBaseIcon from '../components/NativeBaseIcon'
-import consulta from '../APis/fastAPIs'
-
-consulta()
+import { fetchFastAPIHome } from '../APis/fastAPIs'
 
 // Define the config
 const config = {
@@ -45,7 +44,15 @@ function ToggleDarkMode() {
 }
 
 const Home = () => {
-  consulta()
+  const [data, setData] = useState(null)
+
+  useEffect(() => {
+    const fetchData = fetchFastAPIHome()
+    fetchData.then((res) => {
+      setData(res.data.mensaje)
+    })
+  }, [])
+
   return (
     <NativeBaseProvider>
       <Center
@@ -81,6 +88,15 @@ const Home = () => {
               Learn NativeBase
             </Text>
           </Link>
+          <Alert
+            maxW="400"
+            status="info"
+            colorScheme="info"
+            _dark={{ bg: '#01A9D7' }}
+            _light={{ bg: '#39CEF7' }}
+          >
+            <Text>{data}</Text>
+          </Alert>
           <ToggleDarkMode />
         </VStack>
       </Center>
