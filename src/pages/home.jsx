@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Text,
   Link,
@@ -45,6 +45,7 @@ function ToggleDarkMode() {
 }
 
 const Home = () => {
+  consulta()
   return (
     <NativeBaseProvider>
       <Center
