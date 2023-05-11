@@ -42,6 +42,8 @@ Este recurso solo se ejecutara una vez al crear el ambiente (en este caso ya est
 
 # Si hay errores con el Empaquetado Web
 
+Recuerde ejecutar los comandos uno por uno para no causar errores.
+
 ```sh
 npm uninstall native-base
 npx expo install native-base@3.4.28
