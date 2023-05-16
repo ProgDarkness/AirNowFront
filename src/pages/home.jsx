@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import {
   Text,
+  View,
   Link,
   HStack,
   Center,
   Heading,
   Switch,
   useColorMode,
-  NativeBaseProvider,
   extendTheme,
   VStack,
   Alert,
-  Box
+  Box,
+  FlatList,
+  ScrollView
 } from 'native-base'
 import NativeBaseIcon from '../components/NativeBaseIcon'
-import { fetchFastAPIHome } from '../APis/fastAPIs'
+import { fetchFastAPIHome, userById } from '../APis/fastAPIs'
 
 // Define the config
 const config = {
@@ -45,22 +47,31 @@ function ToggleDarkMode() {
 
 const Home = () => {
   const [data, setData] = useState(null)
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
     const fetchData = fetchFastAPIHome()
+    const userFetch = userById(1)
+
     fetchData.then((res) => {
       setData(res.data.mensaje)
+    })
+
+    userFetch.then((res) => {
+      setUser(res.data)
     })
   }, [])
 
   return (
-    <NativeBaseProvider>
-      <Center
-        _dark={{ bg: 'blueGray.900' }}
-        _light={{ bg: 'blueGray.50' }}
-        px={4}
-        flex={1}
-      >
+    <Center
+      _dark={{ bg: 'blueGray.900' }}
+      _light={{ bg: 'blueGray.50' }}
+      px={4}
+      flex={1}
+      safeAreaTop="10"
+      safeAreaBottom="5"
+    >
+      <ScrollView>
         <VStack space={5} alignItems="center">
           <NativeBaseIcon />
           <Heading size="lg">Welcome to NativeBase</Heading>
@@ -88,6 +99,7 @@ const Home = () => {
               Learn NativeBase
             </Text>
           </Link>
+          <ToggleDarkMode />
           <Alert
             maxW="400"
             status="info"
@@ -97,10 +109,46 @@ const Home = () => {
           >
             <Text>{data}</Text>
           </Alert>
-          <ToggleDarkMode />
+          <Alert
+            maxW="400"
+            status="info"
+            colorScheme="info"
+            _dark={{ bg: '#01A9D7' }}
+            _light={{ bg: '#39CEF7' }}
+          >
+            <Text>
+              Email: {user?.email}
+              {'\n'}
+              Id: {user?.id}
+              {'\n'}
+              validate: {user?.is_active ? 'True' : 'False'}
+            </Text>
+          </Alert>
+          <FlatList
+            data={user?.items}
+            renderItem={(item) => (
+              <View style={{ marginBottom: 20 }}>
+                <Alert
+                  maxW="400"
+                  status="info"
+                  colorScheme="info"
+                  _dark={{ bg: '#01A9D7' }}
+                  _light={{ bg: '#39CEF7' }}
+                >
+                  <Text>
+                    Titulo: {item.item.title} {'\n'}
+                    Descripcion: {item.item.description} {'\n'}
+                    Id_item: {item.item.id} {'\n'}
+                    Id_user: {item.item.owner_id}
+                  </Text>
+                </Alert>
+              </View>
+            )}
+            keyExtractor={(item) => item.id}
+          />
         </VStack>
-      </Center>
-    </NativeBaseProvider>
+      </ScrollView>
+    </Center>
   )
 }
 
